@@ -5,5 +5,5 @@ var clientSchema = new mongoose.Schema({
     token:String,
     userid:Number
 });
-userSchema.plugin(AutoIncrement, { inc_field: 'userid' });
+clientSchema.plugin(AutoIncrement, { inc_field: 'userid' });
 module.exports = mongoose.model("client", clientSchema);

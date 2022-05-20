@@ -1,7 +1,5 @@
 const express = require('express');
 const mongoose = require("mongoose");
-const nodegcm = require("nodegcm");
-const { google } = require("googleapis");
 const router = express.Router();
 
 

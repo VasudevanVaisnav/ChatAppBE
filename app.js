@@ -3,25 +3,21 @@ const express = require("express");
 const bodyparser = require("body-parser");
 const app = express();
 
-// const clientRouter = require("./routes/clientRouter");
+const clientRouter = require("./routes/clientRouter");
 
 let dbConnectCounter = 0;
 function dbConnect(){
     mongoose.connect("mongodb+srv://root:Vasu2103@cluster0.cjusl.mongodb.net?retryWrites=true&w=majority"
-      ,{
-        useNewUrlParser: true, 
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-        useCreateIndex: true
-    },(err)=>{
+      ,{},(err)=>{
       if(!err)
         console.log("database connected");
-      else if(dbConnectCounter<10){
+      else if(dbConnectCounter<process.env.DB_RETRIES_MAX){
         dbConnectCounter++;
         console.log(`retry ${dbConnectCounter}`);
         dbConnect();
       }
       else{
+	console.log(err);
         throw new Error("db connection failed");
       }
     });
